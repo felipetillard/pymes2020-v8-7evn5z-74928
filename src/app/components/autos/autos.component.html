@@ -1,3 +1,89 @@
-<p>
-autos works!
-</p>
+
+<div class='container' *ngIf="AccionAbmc == 'L'">
+
+	<button type="button" class="btn btn-primary" (click)="Agregar()">
+            <span class="fas fa-plus"></span> 
+            Agregar
+  </button>
+
+	<br>
+	<br>
+
+	<table class="table table-bordered table-striped">
+
+		<thead>
+			<tr>
+				<th class="text-center">NombreAuto</th>
+				<th class="text-center">IdAuto</th>
+        <th class="text-center">PrecioAuto</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr *ngFor="let auto of autos">
+				<td>{{ auto.NombreAuto }}</td>
+				<td>{{ auto.IdAuto }}</td>
+        <td>{{ auto.PrecioAuto | currency}}</td>
+ 				<td class="text-center text-nowrap">
+					<button type="button"  class="btn btn-sm btn-outline-primary" title="Ver" (click)="Modificar(auto)">
+                        			Modificar
+                    			</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
+
+
+<!-- Registro en Alta,Modificacion y Consulta -->
+
+<form name="FormReg" [formGroup]='formGroup' *ngIf="AccionAbmc != 'L'" class="bg-light">
+
+	<fieldset [disabled]="AccionABMC==='C'">	
+	
+  	<!--campo-->
+		<div class="form-group row">
+			<label class="col-form-label col-sm-2 col-sm-offset-2" for="Nombre">NombreAuto</label>         
+			<div class="col-sm-6">
+				<input type="text" class="form-control"  disabled formControlName="NombreAuto" />
+			</div>
+		</div>
+
+    
+  	<!--campo-->
+		<div class="form-group row">
+			<label class="col-form-label col-sm-2 col-sm-offset-2" for="Nombre">IdAuto</label>         
+			<div class="col-sm-6">
+				<input type="text" class="form-control" disabled formControlName="IdAuto" />
+			</div>
+		</div>
+
+
+    
+  	<!--campo-->
+		<div class="form-group row">
+			<label class="col-form-label col-sm-2 col-sm-offset-2" for="Nombre">PrecioAuto</label>         
+			<div class="col-sm-6">
+				<input type="text" class="form-control" formControlName="PrecioAuto" />
+			</div>
+      <div *ngIf="formGroup.controls.PrecioAuto.invalid">
+        <p>Precio no valido</p>
+      </div>
+		</div>
+
+    
+	</fieldset>
+
+	<!-- Botones Grabar, Cancelar/Volver' -->
+	<div class="row justify-content-center">
+		<button type="button" *ngIf="AccionABMC!=='C'" class="btn btn-primary" (click)="Grabar()">
+            		<span class="fas fa-check"></span> Grabar
+    </button>
+		&nbsp;
+		<button type="button" class="btn btn-warning" (click)="Volver()">
+            	<span class="fas fa-undo"></span> {{AccionABMC=='C' ? 'Volver' : 'Cancelar'}}
+    </button>
+	</div>
+
+</form>

@@ -48,8 +48,9 @@ import { AutosService } from './services/autos.service';
   ],
   entryComponents: [ModalDialogComponent],
   providers: [
+    AutosService,
      {provide: APP_BASE_HREF, useValue : '/' },
-    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true, providers: [AutosService] }
+    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
